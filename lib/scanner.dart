@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:camera/camera.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -16,7 +17,7 @@ class _ScannerOverlayShape extends ShapeBorder {
   });
 
   @override
-  EdgeInsetsGeometry get dimensions => EdgeInsets.all(10.0);
+  EdgeInsetsGeometry get dimensions => const EdgeInsets.all(10.0);
 
   @override
   Path getInnerPath(Rect rect, { TextDirection? textDirection}) {
@@ -51,12 +52,12 @@ class _ScannerOverlayShape extends ShapeBorder {
 
   @override
   void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {
-    const lineSize = 30;
+    const lineSize = 40;
 
     final width = rect.width;
     final borderWidthSize = width * 10 / 100;
     final height = rect.height;
-    final borderHeightSize = height - (width - borderWidthSize);
+    final borderHeightSize = (height - (width - borderWidthSize));
     final borderSize = Size(borderWidthSize / 2, borderHeightSize / 2);
 
     var paint = Paint()
@@ -86,8 +87,7 @@ class _ScannerOverlayShape extends ShapeBorder {
       ..style = PaintingStyle.stroke
       ..strokeWidth = borderWidth;
 
-   
-
+  
     final borderOffset = borderWidth / 2;
     final realReact = Rect.fromLTRB(borderSize.width + borderOffset, borderSize.height + borderOffset + rect.top, width - borderSize.width - borderOffset,
         height - borderSize.height - borderOffset + rect.top);
@@ -172,6 +172,46 @@ class _ScannerOverlayShape extends ShapeBorder {
   }
 }
 
+class ImageScannerAnimation extends AnimatedWidget {
+  final bool stopped;
+  final double width;
+
+  const ImageScannerAnimation(this.stopped, this.width,
+      { required Animation<double> animation})
+      : super( listenable: animation);
+
+  Widget build(BuildContext context) {
+    final Animation<double> animation = listenable as Animation<double>;
+    final scorePosition = (animation.value * 315) +40;
+
+    Color color1 = Colors.greenAccent;
+    Color color2 = Colors.green;
+  
+    if (animation.status == AnimationStatus.reverse) {
+      color1= Colors.green;
+      color2 = Colors.greenAccent;
+    }
+
+    return Positioned(
+        bottom: scorePosition+180,
+        left: 18.0,
+        child: Opacity(
+            opacity: (stopped) ? 0.0 : 1.0,
+            child: Container(
+              height: 3.0,
+              width: width,
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: const [0.1, 0.9],
+                colors: [color1,color2],
+              )),
+            )));
+  }
+}
+
+
 class ScannerPage extends StatefulWidget {
   final CameraPreview? cameraPreview;
   const ScannerPage({super.key, this.cameraPreview});
@@ -180,7 +220,45 @@ class ScannerPage extends StatefulWidget {
   State<ScannerPage> createState() => _ScannerPageState();
 }
 
-class _ScannerPageState extends State<ScannerPage> {
+class _ScannerPageState extends State<ScannerPage> 
+with SingleTickerProviderStateMixin {
+
+  late AnimationController _animationController;
+  bool _animationStopped = false;
+  String scanText = "Scan";
+  bool scanning = false;
+
+  @override
+  void initState() {
+    print("Hello there Hello there");
+    _animationController =  AnimationController(
+        duration: const Duration(seconds: 1), vsync: this);
+
+    _animationController.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        animateScanAnimation(true);
+      } else if (status == AnimationStatus.dismissed) {
+        animateScanAnimation(false);
+      }
+    });
+    super.initState();
+  }
+
+  void animateScanAnimation(bool reverse) {
+    if (reverse) {
+      _animationController.reverse(from: 1.0);
+    } else {
+      _animationController.forward(from: 0.0);
+    }
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -189,13 +267,36 @@ class _ScannerPageState extends State<ScannerPage> {
         fit: StackFit.expand,
         children: [
           widget.cameraPreview!,
-          Container(decoration: ShapeDecoration(shape: _ScannerOverlayShape(borderColor: Colors.green,borderWidth: 3.0)),)
+          Container(decoration: ShapeDecoration(shape: _ScannerOverlayShape(borderColor: Color(0xFF2979BF),borderWidth: 3.0))),
+             ImageScannerAnimation(
+                      _animationStopped,
+                      325,
+                      animation: _animationController,
+                    ),
+               Padding(
+                    padding: const EdgeInsets.only(top: 32.0),
+                    child: CupertinoButton(
+                    
+                      onPressed: () {
+                        if (!scanning) {
+                          animateScanAnimation(false);
+                          setState(() {
+                            _animationStopped = false;
+                            scanning = true;
+                            scanText = "Stop";
+                          });
+                        } else {
+                          setState(() {
+                            _animationStopped = true;
+                            scanning = false;
+                            scanText = "Scan";
+                          });
+                        }
+                      },
+                      child: Text(scanText),
+                    ),
+                  )
           ]),
     );
   }
 }
-
-
-
-
-

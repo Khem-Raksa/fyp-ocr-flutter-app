@@ -29,18 +29,18 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'OCR Engine System',
       theme: ThemeData(
-        primarySwatch:   const MaterialColor( 0xFF009688, // default color, normally matches [500]
+        primarySwatch:   const MaterialColor( 0xFF2979BF, // default color, normally matches [500]
     <int, Color>{
-      50:  Color(0xFFE0F2F1),
-      100: Color(0xFFB2DFDB),
-      200: Color(0xFF80CBC4),
-      300: Color(0xFF4DB6AC),
-      400: Color(0xFF26A69A),
-      500: Color(0xFF009688), // same as primary
-      600: Color(0xFF00897B),
-      700: Color(0xFF00796B),
-      800: Color(0xFF00695C),
-      900: Color(0xFF004D40),
+      50:  Color(0xFF2979BF),
+      100: Color(0xFF2979BF),
+      200: Color(0xFF2979BF),
+      300: Color(0xFF2979BF),
+      400: Color(0xFF2979BF),
+      500: Color(0xFF2979BF), // same as primary
+      600: Color(0xFF2979BF),
+      700: Color(0xFF2979BF),
+      800: Color(0xFF2979BF),
+      900: Color(0xFF2979BF),
     },),
       ),
       home: MyHomePage(title: 'OCR Demo App - Made with ❤'),
