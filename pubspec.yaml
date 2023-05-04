@@ -38,8 +38,9 @@ dependencies:
   http: ^0.13.5
   image_picker: ^0.8.7
   get: ^4.6.5
-  camera: ^0.10.3+2
-  flutter_barcode_scanner: ^2.0.0
+  flutter_document_scanner: ^0.1.0
+  # camera: ^0.10.3+2s
+
 
 dev_dependencies:
   flutter_test:
