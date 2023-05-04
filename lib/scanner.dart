@@ -2,8 +2,6 @@ import 'dart:ui';
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class _ScannerOverlayShape extends ShapeBorder {
   final Color borderColor;
@@ -180,6 +178,7 @@ class ImageScannerAnimation extends AnimatedWidget {
       { required Animation<double> animation})
       : super( listenable: animation);
 
+  @override
   Widget build(BuildContext context) {
     final Animation<double> animation = listenable as Animation<double>;
     final scorePosition = (animation.value * 315) +40;
