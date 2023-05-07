@@ -9,6 +9,8 @@ class ScanningScreen extends StatefulWidget {
 class _ScanningScreenState extends State<ScanningScreen> {
   final _documentScannerController = DocumentScannerController();
 
+
+  //Send to OCR server
   void _onDocumentScanned(document) {
     // Handle the scanned document
     print('Scanned document: $document');
@@ -26,7 +28,7 @@ class _ScanningScreenState extends State<ScanningScreen> {
         controller: _documentScannerController,
         onSave: _onDocumentScanned,
         resolutionCamera: ResolutionPreset.high,
-        initialCameraLensDirection: CameraLensDirection.front,
+        initialCameraLensDirection: CameraLensDirection.back,
         // Add any additional configuration options here
       ),
     );
