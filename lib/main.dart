@@ -5,6 +5,7 @@ import 'package:ocr_flutter/result_page.dart';
 import 'package:ocr_flutter/scanner.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -15,12 +16,25 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.lightBlue,
+        primarySwatch: const MaterialColor(0xff27374D, {
+         50: Color(0xff27374D),
+        100: Color(0xff27374D),
+        200: Color(0xff27374D),
+        300: Color(0xff27374D),
+        400: Color(0xff27374D),
+        500: Color(0xff27374D),
+        600: Color(0xff27374D),
+        700: Color(0xff27374D),
+        800: Color(0xff27374D),
+        900: Color(0xff27374D),
+}),
       ),
-      home: const MyHomePage(title: 'FYP OCR Demo App'),
-    );
+      // home: const MyHomePage(title: 'FYP OCR Demo App'),
+      home:  const MyHomePage(title: "FYP OCR Demo App")
+      );
   }
 }
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({ required this.title}) ;
@@ -80,7 +94,6 @@ class _MyHomePageState extends State<MyHomePage> {
     
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,12 +109,10 @@ class _MyHomePageState extends State<MyHomePage> {
               var images = await pickImages(context);
               sendImagesToOCR(images);
               Get.to(const ResultPage(ResultPageText: "Hello this is result page"));
-
             }, child: const Text("Upload Pictures",style: TextStyle(color: Colors.white),)),
              ElevatedButton(onPressed: (){
               goToScan(context);
               Get.to(const ResultPage(ResultPageText: "Result After Scan"));
-
             }, child: const Text("Scan Picture",style: TextStyle(color: Colors.white))),
           ],
         )
@@ -109,3 +120,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
