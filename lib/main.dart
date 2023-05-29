@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
 }),
       ),
       // home: const MyHomePage(title: 'FYP OCR Demo App'),
-      home:  const MyHomePage(title: "FYP OCR Demo App")
+      home:  const MyHomePage(title: 'FYP OCR Demo App')
       );
   }
 }
@@ -120,4 +120,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
