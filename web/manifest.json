@@ -1,6 +1,6 @@
 {
-    "name": "ocr_flutter",
-    "short_name": "ocr_flutter",
+    "name": "Khmer_OCR",
+    "short_name": "Khmer_OCR",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

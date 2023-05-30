@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ocr_flutter">
+    package="com.example.Khmer_OCR">
    <application
-        android:label="ocr_flutter"
+        android:label="Khmer_OCR"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

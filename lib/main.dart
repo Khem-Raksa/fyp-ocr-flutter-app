@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-import 'package:ocr_flutter/result_page.dart';
-import 'package:ocr_flutter/scanner.dart';
+import 'package:Khmer_OCR/result_page.dart';
+import 'package:Khmer_OCR/scanner.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 

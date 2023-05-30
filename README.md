@@ -1,4 +1,4 @@
-# ocr_flutter
+# KHMER_OCR
 
 A new Flutter project.
 
