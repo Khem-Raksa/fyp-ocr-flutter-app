@@ -61,9 +61,9 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: false
-  image_path: "assets/ocr4.png" 
-  adaptive_icon_background: "assets/ocr4.png"
-  adaptive_icon_foreground: "assets/ocr4.png"
+  image_path: "assets/ocr8.png" 
+  adaptive_icon_background: "assets/ocr8.png"
+  adaptive_icon_foreground: "assets/ocr8.png"
 
 # The following section is specific to Flutter packages.
 flutter:
