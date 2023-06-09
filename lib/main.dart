@@ -55,9 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
       imageQuality: 80
     );
 
-    if(pickedImages!=null){
-      images = pickedImages.map((pickedImage)=>File(pickedImage.path)).toList();
-    }
+    images = pickedImages.map((pickedImage)=>File(pickedImage.path)).toList();
 
     return images;
   }
@@ -71,12 +69,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> sendImagesToOCR(List<File> files) async {
     // Send Images to OCR
-    print("Say Hi");
     var url = Uri.parse('http://yourflaskserver.com/ocr'); // Replace with your Flask server URL
     var request = http.MultipartRequest('POST', url);
 
   for (var file in files) {
-    print(file);
     var stream = http.ByteStream(file.openRead());
     var length = await file.length();
     var multipartFile = http.MultipartFile('file', stream, length,
@@ -87,7 +83,6 @@ class _MyHomePageState extends State<MyHomePage> {
   var response = await request.send();
 
   if (response.statusCode == 200) {
-    print('Images sent successfully to OCR');
   } else {
     print('Error sending images to OCR: ${response.statusCode}');
   }
